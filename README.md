@@ -1,24 +1,14 @@
-# README
+# アプリケーション名
+　smile
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# アプリケーション概要
+　子供の健康状態を夫婦で共有できるアプリ、受診時に必要な簡単な情報も記載できる
 
-Things you may want to cover:
+# URL
 
-* Ruby version
+# テスト用アカウント
 
-* System dependencies
 
-* Configuration
+# 利用方法
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

@@ -1,0 +1,61 @@
+
+/*main-contents*/
+.main-contents {
+  display: flex;
+  height: 100vh;
+}
+/*サイドバー*/
+aside {
+  width: 25%;
+  border-right: 1px solid;
+  background-color:rgba(220,236,214,0.8);
+}
+
+ul {
+  padding: 0;
+  text-align: left;
+}
+
+ul li {
+  list-style: none;
+}
+
+/*main*/
+.main-area {
+  width: 100%;
+}
+/*main-area*/
+.main-area {
+  background-image: url(image01.png) ;
+  background-size: cover;
+  background-color:rgba(255,255,255,0.5) ;
+  background-blend-mode: lighten;
+  padding: 20px;
+  margin: 10px;
+}
+
+.main-area h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

@@ -1,0 +1,87 @@
+<div class="main-contents">
+  <aside>
+    <div class="user-name">
+      <p><%= link_to current_user.name, edit_user_registration_path %>さん</p>
+    </div>
+    <p><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></p> 
+    <h2 class="sub-title">menu</h2>
+    <ul class="sub-menu">
+      <li><%= link_to 'ワクチン', vaccines_path%></li>
+      <li><%= link_to 'アレルギー', allergies_path %></li>
+      <li><a href="#">既往歴</a></li>
+      <li><a href="#">成長曲線</a></li>
+    </ul>
+    <div class="news">
+      <h2>お知らせ</h2>
+    </div>
+  </aside>
+  <div class="main-area">
+    <div class="vaccination-wrapper">
+      <div class="container">
+        <h1>ワクチン接種一覧</h1>
+
+        <table class="vaccination-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>ワクチン名</th>
+              <th>接種日</th>
+              <th>備考</th>
+            </tr>
+          </thead>
+            <tbody>
+              <% @vaccines.each do |vaccine| %>
+                <tr class="vaccination-row">
+                  <td class="check-column">
+                    <label class="checkbox-label">
+                      <input type="checkbox" class="check-input">
+                      <span class="checkmark"></span>
+                    </label>
+                  </td>
+                  <td class="vaccine-name-column">
+                    <%= vaccine.vaccine_name %>
+                  </td>
+                  <td class="vaccination-date-column">
+                    <%= vaccine.vaccination_date %>
+                  </td>
+                  <td class="notes-column">
+                    <%= vaccine.notes %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+<div class="modal fade" id="addVaccineModal" tabindex="-1" role="dialog" aria-labelledby="addVaccineModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addVaccineModalLabel">ワクチン追加</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: @vaccine, url: vaccines_path, class: "vaccine-form") do |form| %>
+          <div class="form-group">
+            <%= form.label :vaccine_name, "ワクチン名" %>
+            <%= form.text_field :vaccine_name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= form.label :vaccination_date, "接種日" %>
+            <%= form.date_field :vaccination_date, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= form.label :notes, "備考" %>
+            <%= form.text_area :notes, class: "form-control" %>
+          </div>
+          <div class="form-actions">
+            <%= form.submit "追加", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+        </table>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,2 @@
+class UnderlyingCondition < ApplicationRecord
+end

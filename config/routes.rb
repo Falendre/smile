@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   end
   root 'home#index'
   resources :allergies, only: [:index]
+  resources :vaccines 
+  resources :medications
+  resources :underlying_conditions
 end

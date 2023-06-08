@@ -13,8 +13,25 @@
         <div class="news"><h2>お知らせ</h2></div>
       </aside>
       <div class="main-area">
-        <p>メニューから見たい項目を選んでください</p>
-        <p>基本情報を編集する場合はユーザー名をクリックして下さい</p>
+        <%= form_with model: @underlying_condition, url: underlying_conditions_path do |form| %>
+          <div class="field">
+            <%= form.label :details %>
+            <%= form.text_field :details %>
+          </div>
+
+          <div class="field">
+            <%= form.label :diagnosis_date %>
+            <%= form.date_field :diagnosis_date %>
+          </div>
+
+          <div class="field">
+            <%= form.label :notes %>
+            <%= form.text_area :notes %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit "保存" %>
+          </div>
+        <% end %>
       </div>
     </div>
-

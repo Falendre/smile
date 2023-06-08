@@ -1,0 +1,34 @@
+.vaccination-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.vaccination-table th,
+.vaccination-table td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+.vaccination-table th {
+  background-color: #f0f0f0;
+}
+
+.vaccination-row:hover {
+  background-color: #f9f9f9;
+}
+
+.add-row {
+  text-align: center;
+}
+
+.add-button {
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}

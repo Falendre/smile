@@ -1,0 +1,32 @@
+  <div class="main-contents">
+    <aside>
+      <div class="user-name">
+        <p><%= link_to current_user.name, edit_user_registration_path %>さん</p>
+      </div>
+      <p><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></p> 
+      <h2 class="sub-title">menu</h2>
+      <ul class="sub-menu">
+        <li><%= link_to 'ワクチン', vaccines_path %></li>
+        <li><%= link_to 'アレルギー', allergies_path %></li>
+        <li><%= link_to '薬剤情報', medications_path %></li>
+        <li><a href="#">既往歴</a></li>
+        <li><a href="#">成長曲線</a></li>
+      </ul>
+      <div class="news">
+        <h2>お知らせ</h2>
+      </div>
+    </aside>
+    <div class="main-area">
+      <%= form_with(model: @medication, url: medications_path, local: true, html: {multipart: true}) do |form| %>
+        <%= form.file_field :image %>
+        <%= form.submit '保存' %>
+      <% end %>
+      <h2>お薬手帳</h2>
+      <% @medications.each do |medication| %>
+        <div class="medication-entry">
+        <h3><%= medication.date.strftime("%Y年%m月%d日") %></h3>
+        <%= image_tag medication.image %>
+        </div>
+      <% end %>
+    </div>
+  </div>

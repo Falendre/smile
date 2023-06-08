@@ -13,8 +13,27 @@
         <div class="news"><h2>お知らせ</h2></div>
       </aside>
       <div class="main-area">
-        <p>メニューから見たい項目を選んでください</p>
-        <p>基本情報を編集する場合はユーザー名をクリックして下さい</p>
+      <h1>身長体重データ一覧</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th class="date-column">日付</th>
+      <th class="height-column">身長</th>
+      <th class="weight-column">体重</th>
+      <th class="notes-column">備考</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @body_types.each do |body_type| %>
+      <tr>
+        <td><%= body_type.measurement_date %></td>
+        <td><%= body_type.height %></td>
+        <td><%= body_type.weight %></td>
+        <td><%= body_type.notes %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
       </div>
     </div>
-

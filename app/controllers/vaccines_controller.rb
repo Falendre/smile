@@ -1,4 +1,6 @@
 class VaccinesController < ApplicationController
+  before_action :set_vaccine, only: [:edit, :update, :destroy]
+  
   def index
     @vaccines = Vaccine.all
   end
@@ -10,9 +12,10 @@ class VaccinesController < ApplicationController
   def create
     @vaccine = Vaccine.new(vaccine_params)
     if @vaccine.save
-      redirect_to vaccines_path, notice: "ワクチンが作成されました。"
+      redirect_to vaccines_path
     else
-      render :new
+      @vaccines = Vaccine.all
+      render :index
     end
   end
 
@@ -23,7 +26,7 @@ class VaccinesController < ApplicationController
   def update
     @vaccine = Vaccine.find(params[:id])
     if @vaccine.update(vaccine_params)
-      redirect_to vaccines_path, notice: "ワクチンが更新されました。"
+      redirect_to vaccines_path
     else
       render :edit
     end
@@ -32,13 +35,17 @@ class VaccinesController < ApplicationController
   def destroy
     @vaccine = Vaccine.find(params[:id])
     @vaccine.destroy
-    redirect_to vaccines_path, notice: "ワクチンが削除されました。"
+    redirect_to vaccines_path
   end
 
   private
 
   def vaccine_params
-    params.require(:vaccine).permit(:vaccine_name, :vaccination_date, :notes)
+    params.require(:vaccine).permit(:vaccine_name, :vaccination_date, :notes, :user_id)
+  end
+
+  def set_vaccine
+    @vaccine = Vaccine.find(params[:id])
   end
 end
   

@@ -1,27 +1,53 @@
 <div class="main-contents">
   <aside>
-    <div class="user-name"><p>ユーザー名さん</p></div>
+    <div class="user-name"><p><%= link_to current_user.name, edit_user_registration_path %>さん</p></div>
+    <p><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></p> 
     <h2 class="sub-title">menu</h2>
-      <ul class="sub-menu">
-        <li><a href="#">ワクチン</a></li>
-        <li><%= link_to 'アレルギー', allergies_path %></li>
-        <li><a href="#">既往歴</a></li>
-        <li><a href="#">成長曲線</a></li>
-      </ul>
+    <ul class="sub-menu">
+      <li><%= link_to 'ワクチン', vaccines_path %></li>
+      <li><%= link_to 'アレルギー', allergies_path %></li>
+      <li><%= link_to '薬剤情報', medications_path %></li>
+      <li><%= link_to '既往歴', underlying_conditions_path %></li>
+      <li><%= link_to '成長曲線', body_types_path %></li>
+    </ul>
     <div class="news"><h2>お知らせ</h2></div>
   </aside>
   <div class="main-area">
     <h2>アレルギー情報</h2>
-    <%= form_with model: @allergies, url: allergies_path, method: :patch do |form| %>
+    <%= form_with model: @allergy, local:true do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
       <div class="form-group">
-        <%= form.label :kinds, "アレルギーの種類" %>
-        <%= form.text_field :kinds, class: "form-control" %>
+        <%= f.label :kinds, "アレルギーの種類" %>
+        <%= f.text_field :kinds, class: "form-control" %>
       </div>
       <div class="form-group">
-        <%= form.label :notes, "備考" %>
-        <%= form.text_area :notes, class: "form-control" %>
+        <%= f.label :notes, "備考" %>
+        <%= f.text_area :notes, class: "form-control" %>
       </div>
-      <%= form.submit "保存", class: "btn btn-primary" %>
+      <%= f.submit "追加", class: "btn btn-primary" %>
     <% end %>
+  
+    <h2>アレルギー情報一覧</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>アレルギーの種類</th>
+          <th>備考</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @allergies.each do |allergy| %>
+          <tr>
+            <td><%= allergy.kinds %></td>
+            <td><%= allergy.notes %></td>
+            <td>
+              <%= link_to "編集", edit_allergy_path(allergy), class: "btn btn-primary btn-sm" %>
+              <%= link_to "削除", allergy_path(allergy), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

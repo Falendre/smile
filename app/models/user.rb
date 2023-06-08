@@ -3,6 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  has_many :allergies
+  has_many :body_types
+  has_many :medications
+  has_many :underlying_conditions
+  has_many :vaccines
 
   with_options presence: true do
     validates :name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }

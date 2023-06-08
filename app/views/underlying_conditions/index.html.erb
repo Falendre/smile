@@ -8,30 +8,52 @@
           <li><%= link_to 'アレルギー', allergies_path %></li>
           <li><%= link_to '薬剤情報', medications_path %></li>
           <li><%= link_to '既往歴', underlying_conditions_path %></li>
-          <li><a href="#">成長曲線</a></li>
+          <li><%= link_to '成長曲線', body_types_path %></li>
         </ul>
         <div class="news"><h2>お知らせ</h2></div>
       </aside>
       <div class="main-area">
-        <%= form_with model: @underlying_condition, url: underlying_conditions_path do |form| %>
-          <div class="field">
-            <%= form.label :details %>
-            <%= form.text_field :details %>
+        <%= form_with model: @underlying_condition, url: underlying_conditions_path do |f| %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <div class="form-group">
+            <%= f.label :details, "診断名" %>
+            <%= f.text_field :details, class: "form-control" %>
           </div>
 
-          <div class="field">
-            <%= form.label :diagnosis_date %>
-            <%= form.date_field :diagnosis_date %>
+          <div class="form-group">
+            <%= f.label :diagnosis_date, "診断日" %>
+            <%= f.date_field :diagnosis_date, class: "form-control" %>
           </div>
 
-          <div class="field">
-            <%= form.label :notes %>
-            <%= form.text_area :notes %>
+          <div class="form-group" >
+            <%= f.label :notes, "備考" %>
+            <%= f.text_area :notes, class: "form-control" %>
           </div>
 
-          <div class="actions">
-            <%= form.submit "保存" %>
-          </div>
+            <%= f.submit "追加", class: "btn btn-primary" %>
         <% end %>
+        <h2>既往歴一覧</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>診断名</th>
+          <th>診断日</th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @underlying_conditions.each do |underlying_condition| %>
+          <tr>
+            <td><%= underlying_condition.details %></td>
+            <td><%=  underlying_condition.diagnosis_date%></td>
+            <td><%= underlying_condition.notes %></td>
+            <td>
+              <%= link_to "編集", edit_underlying_condition_path(underlying_condition), class: "btn btn-primary btn-sm" %>
+              <%= link_to "削除", underlying_condition_path(underlying_condition), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
       </div>
     </div>

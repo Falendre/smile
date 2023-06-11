@@ -7,14 +7,14 @@
 # URL
  https://smile-brrt.onrender.com
 
-# テスト用アカウント 改行する
+# テスト用アカウント
 - Basic認証パスワード 1234
 - Basic認証ID papa
 - メールアドレス test@test.com
 - パスワード a123456
 
 # 利用方法
-# 子供の健康状態を投稿　改行する
+# 子供の健康状態を投稿
 １．トップページからユーザーの新規登録またはログインを行う  
 ２．各項目をメニューから選び、必要事項を入力する
 # 情報の確認
@@ -26,18 +26,36 @@
 両親で共有できると尚良いと考え、アプリケーションの開発を行う
 
 # 洗い出した要件
- https://docs.google.com/spreadsheets/d/1oarxka9Om8IlWwogX0aZ5J3Ku9hxL7v_ScH4-sx4Ukk/edit#gid=982722306
+[要件定義シート](https://docs.google.com/spreadsheets/d/1oarxka9Om8IlWwogX0aZ5J3Ku9hxL7v_ScH4-sx4Ukk/edit#gid=982722306)
 
 # 実装した機能
--ログイン機能
+- ログイン機能
 [![Image from Gyazo](https://i.gyazo.com/e030ece462df33e3647fe64a0e00edd7.gif)](https://gyazo.com/e030ece462df33e3647fe64a0e00edd7)
+
+- ログアウト機能
+[![Image from Gyazo](https://i.gyazo.com/15163b53c46383a49e76734a6f7cc999.gif)](https://gyazo.com/15163b53c46383a49e76734a6f7cc999)
+
+- 各項目へのリンク機能
+[![Image from Gyazo](https://i.gyazo.com/630850051b7344830d66ad4ce1748bfd.gif)](https://gyazo.com/630850051b7344830d66ad4ce1748bfd)
+
+- お薬手帳の画像投稿機能
+[![Image from Gyazo](https://i.gyazo.com/916e9f3291bd21abf90ae02d9ba034e3.gif)](https://gyazo.com/916e9f3291bd21abf90ae02d9ba034e3)
+
+- 成長の記録をグラフで表示、最新データは5件まで表示（もっと見るをクリックする事で過去のデータを見れるように今後実装予定）
+[![Image from Gyazo](https://i.gyazo.com/102acb55477ec2ffc5c7dc9d03c547b3.gif)](https://gyazo.com/102acb55477ec2ffc5c7dc9d03c547b3)
 
 # 実装予定の機能
 
 - ユーザー情報や各項目の編集機能
-- javascriptの修正やより使いやすくする為の機能実装
+- javascriptの修正やより使いやすくする為の機能（接種済みのワクチンには済みの印鑑マークをつけられる等）実装
+- 冗長コード修正やインデントを整える
+- バリデーションの調整
 
 # データベース設計
+[![Image from Gyazo](https://i.gyazo.com/90525d6b5ca8437e2581b4c3d0b67e30.png)](https://gyazo.com/90525d6b5ca8437e2581b4c3d0b67e30)
+
+# 画面遷移図
+[![Image from Gyazo](https://i.gyazo.com/a80b888be7aaee9fc2192f458040beb1.png)](https://gyazo.com/a80b888be7aaee9fc2192f458040beb1)
 
 # テーブル設計
 
@@ -126,3 +144,23 @@
  
 #### Association
 - belongs_to :user
+
+# 開発環境
+
+- フロントエンド
+- バックエンド
+- インフラ
+- テスト
+- テキストエディタ
+- タスク管理
+
+# ローカルでの動作方法
+以下のコマンドを順に実行  
+% git clone https://github.com/Falendre/smile.git  
+% cd smile  
+% bundle install  
+% yarn install
+
+# 工夫したポイント
+①小さな子供を持つ両親をターゲットにしている為、色合いを見やすいかつ穏やかな色に設定しました  
+②急な受診時等母子手帳が手元にない時にすぐに子供の情報を取れるようにシンプルなデザインで機能も最小限必要なものだけにしています

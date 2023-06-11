@@ -28,7 +28,43 @@
     document.addEventListener('DOMContentLoaded', function() {
     drawChart();
   });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var moreButton = document.getElementById('more-body-types');
+
+    moreButton.addEventListener('click', function() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '<%= more_body_types_path %>');
+      xhr.responseType = 'json';
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          var bodyTypes = xhr.response;
+          var tableBody = document.querySelector('tbody');
+          bodyTypes.forEach(function(bodyType) {
+            var row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${bodyType.measurement_date}</td>
+              <td>${bodyType.height}cm</td>
+              <td>${bodyType.weight}kg</td>
+              <td>${bodyType.notes}</td>
+              <td>
+                <a href="/body_types/${bodyType.id}/edit" class="btn btn-primary btn-sm">編集</a>
+                <a href="/body_types/${bodyType.id}" data-confirm="削除しますか？" data-method="delete" class="btn btn-danger btn-sm">削除</a>
+              </td>
+            `;
+            tableBody.appendChild(row);
+          });
+          if (bodyTypes.length < 5) {
+            moreButton.style.display = 'none';
+          }
+        }
+      };
+      xhr.send();
+    });
+  });
+
 <% end %>
+
     <div class="main-contents">
       <aside>
         <div class="user-name"><p><%= link_to current_user.name, edit_user_registration_path %>さん</p></div>
@@ -94,6 +130,8 @@
     <% end %>
   </tbody>
 </table>
-    
+<div id="more-body-types-container">
+  <%= link_to "もっと表示", more_body_types_path, id: "more-body-types", remote: true %>
+</div>
         </div>
     </div>

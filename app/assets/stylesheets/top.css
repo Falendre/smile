@@ -33,6 +33,8 @@ ul li {
   background-blend-mode: lighten;
   padding: 20px;
   margin: 10px;
+  overflow: auto; 
+  height: calc(100% - 40px);
 }
 
 .main-area h2 {

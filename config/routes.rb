@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :medications
   resources :underlying_conditions
   resources :body_types
+  get 'body_types/more', to: 'body_types#more', as: 'more_body_types'
 end

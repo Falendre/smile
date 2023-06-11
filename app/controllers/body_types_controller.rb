@@ -14,7 +14,17 @@ class BodyTypesController < ApplicationController
   end
 
   def index
-    @body_types = BodyType.all
+    @body_types = BodyType.order(measurement_date: :desc).limit(5)
+  end
+  def more
+    @body_types = BodyType.order(measurement_date: :desc).offset(5).limit(5)
+    respond_to do |format|
+      format.js { render layout: false }
+    end
+  end
+
+  def show
+    head :no_content
   end
 
   def update

@@ -26,15 +26,16 @@
 両親で共有できると尚良いと考え、アプリケーションの開発を行う
 
 # 洗い出した要件
- 後日、記載予定
+ https://docs.google.com/spreadsheets/d/1oarxka9Om8IlWwogX0aZ5J3Ku9hxL7v_ScH4-sx4Ukk/edit#gid=982722306
 
 # 実装した機能
- 後程GIF等を追加  
- 現在、要件に沿ってを実装中
+-ログイン機能
+[![Image from Gyazo](https://i.gyazo.com/e030ece462df33e3647fe64a0e00edd7.gif)](https://gyazo.com/e030ece462df33e3647fe64a0e00edd7)
 
 # 実装予定の機能
 
-- 成長曲線のグラフにプロットできるように追加していく予定
+- ユーザー情報や各項目の編集機能
+- javascriptの修正やより使いやすくする為の機能実装
 
 # データベース設計
 

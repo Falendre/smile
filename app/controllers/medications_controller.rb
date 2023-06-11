@@ -8,14 +8,19 @@ class MedicationsController < ApplicationController
     if medication.save
       redirect_to medications_path
     else
-      flash[:error] = "メディケーションの保存に失敗しました。"
       redirect_to medications_path
     end
+  end
+
+  def destroy
+    @medication = Medication.find(params[:id])
+    @medication.destroy
+    redirect_to medications_path
   end
 
   private
 
   def medication_params
-    params.require(:medication).permit(:image, :prescription_date)
+    params.require(:medication).permit(:image, :prescription_date, :user_id)
   end
 end

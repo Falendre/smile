@@ -67,6 +67,7 @@
 
 | Column             | Type       | Options                        |
 | :----------------- | :--------- | :----------------------------- |
+| user               | references | null: false, foreign_key: true |
 | measurement_date   | date       | null: false                    |
 | height             | string     | null: false                    |
 | weight             | string     | null: false                    |
@@ -80,6 +81,7 @@
 
 | Column             | Type       | Options                        |
 | :----------------- | :--------- | :----------------------------- |
+| user               | references | null: false, foreign_key: true |
 | kinds              | string     | null: false                    |
 | notes              | text       |                                |
  
@@ -91,6 +93,7 @@
 
 | Column             | Type       | Options                        |
 | :----------------- | :--------- | :----------------------------- |
+| user               | references | null: false, foreign_key: true |
 | details            | string     | null: false                    |
 | diagnosis_date     | date       | null: false                    |
 | notes              | text       |                                |
@@ -101,10 +104,11 @@
 
 ### medications テーブル
 
-| Column             | Type    | Options                   |
-| :----------------- | :------ | :------------------------ |
-| prescription_date  | date    | null: false               |
-| notes              | text    |                           |
+| Column             | Type       | Options                        |
+| :----------------- | :--------- | :----------------------------- |
+| user               | references | null: false, foreign_key: true |
+| prescription_date  | date       | null: false                    |
+| notes              | text       |                                |
  
 #### Association
 - belongs_to :user
@@ -112,11 +116,12 @@
 
 ### vaccines テーブル
 
-| Column             | Type    | Options                   |
-| :----------------- | :------ | :------------------------ |
-| vaccine_name       | string  | null:false
-| vaccination_date   | date    | null: false               |
-| notes              | text    |                           |
+| Column             | Type       | Options                        |
+| :----------------- | :--------- | :----------------------------- |
+| user               | references | null: false, foreign_key: true |
+| vaccine_name       | string     | null:false                     |
+| vaccination_date   | date       | null: false                    |
+| notes              | text       |                                |
  
 #### Association
 - belongs_to :user

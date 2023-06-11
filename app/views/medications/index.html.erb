@@ -1,39 +1,45 @@
-  <div class="main-contents">
-    <aside>
-      <div class="user-name">
-        <p><%= link_to current_user.name, edit_user_registration_path %>さん</p>
-      </div>
-      <p><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></p> 
-      <h2 class="sub-title">menu</h2>
-      <ul class="sub-menu">
-        <li><%= link_to 'ワクチン', vaccines_path%></li>
-        <li><%= link_to 'アレルギー', allergies_path %></li>
-        <li><%= link_to '薬剤情報', medications_path %></li>
-        <li><%= link_to '既往歴', underlying_conditions_path %></li>
-        <li><%= link_to '成長曲線', body_types_path %></li>
-      </ul>
-      <div class="news">
-        <h2>お知らせ</h2>
-      </div>
-    </aside>
-    <div class="main-area">
-      <%= form_with model: Medication.new, local: true do |f| %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <div class="form-group">
-          <%= f.file_field :image %>
-        </div>
-        <div class="form-group">
-          <%= f.label :prescription_date, "発行日" %>
-          <%= f.text_field :prescription_date, class: "form-control", type: "date" %>
-        </div>
-        <%= f.submit '追加', class: "btn btn-primary" %>
-      <% end %>
-      <h2>お薬手帳</h2>
-      <% @medications.each do |medication| %>
-        <div class="medication-entry">
-        <h3><%= prescription_date %></h3>
-        <%= image_tag medication.image %>
-        </div>
-      <% end %>
+<div class="main-contents">
+  <aside>
+    <div class="user-name">
+      <p><%= link_to current_user.name, edit_user_registration_path %>さん</p>
     </div>
+    <p><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></p>
+    <h2 class="sub-title">menu</h2>
+    <ul class="sub-menu">
+      <li><%= link_to 'ワクチン', vaccines_path %></li>
+      <li><%= link_to 'アレルギー', allergies_path %></li>
+      <li><%= link_to '薬剤情報', medications_path %></li>
+      <li><%= link_to '既往歴', underlying_conditions_path %></li>
+      <li><%= link_to '成長曲線', body_types_path %></li>
+    </ul>
+    <div class="news">
+      <h2>お知らせ</h2>
+      <p>次回の予防接種情報実装予定</p>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <%= form_with model: Medication.new, local: true do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <div class="form-group">
+        <%= f.file_field :image %>
+      </div>
+      <div class="form-group">
+        <%= f.label :prescription_date, "発行日" %>
+        <%= f.text_field :prescription_date, class: "form-control", type: "date" %>
+      </div>
+      <%= f.submit '追加', class: "btn btn-primary" %>
+    <% end %>
+
+    <h2>お薬手帳</h2>
+
+    <% @medications.each do |medication| %>
+      <div class="medication-entry">
+        <h3><%= medication.prescription_date %></h3>
+        <%= image_tag medication.image.variant(resize: '500x500') %>
+        <%= link_to "編集", edit_medication_path(medication), class: "btn btn-primary btn-sm" %>
+        <%= link_to "削除", medication_path(medication), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-sm" %>
+      </div>
+    <% end %>
   </div>
+</div>

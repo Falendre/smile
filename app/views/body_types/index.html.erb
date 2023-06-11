@@ -10,30 +10,56 @@
           <li><%= link_to '既往歴', underlying_conditions_path %></li>
           <li><%= link_to '成長曲線', body_types_path %></li>
         </ul>
-        <div class="news"><h2>お知らせ</h2></div>
+        <div class="news"><h2>お知らせ</h2>
+        <p>次回の予防接種情報実装予定</p>
+        </div>
       </aside>
       <div class="main-area">
-      <h1>身長体重データ一覧</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th class="date-column">日付</th>
-      <th class="height-column">身長</th>
-      <th class="weight-column">体重</th>
-      <th class="notes-column">備考</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @body_types.each do |body_type| %>
-      <tr>
-        <td><%= body_type.measurement_date %></td>
-        <td><%= body_type.height %></td>
-        <td><%= body_type.weight %></td>
-        <td><%= body_type.notes %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-      </div>
+      <h2>身長・体重のデータ</h2>
+      <%= form_with model: BodyType.new, local:true do |f| %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+        <div class="form-group">
+            <%= f.label :measurement_date, "健診日" %>
+            <%= f.text_field :measurement_date, class: "form-control", type: "date" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :height, "身長" %>
+          <%= f.text_field :height, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :weight, "体重" %>
+          <%= f.text_field :weight, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :notes, "備考" %>
+          <%= f.text_area :notes, class: "form-control" %>
+        </div>
+        <%= f.submit "追加", class: "btn btn-primary" %>
+      <% end %>
+    <h2>健診データ一覧</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>健診日</th>
+          <th>身長</th>
+          <th>体重<th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @body_types.each do |body_type| %>
+          <tr>
+            <td><%= body_type.measurement_date %></td>
+            <td><%= body_type.height  %>cm</td>
+            <td><%= body_type.weight  %>kg</td>
+            <td><%= body_type.notes %></td>
+            <td>
+              <%= link_to "編集", edit_body_type_path(body_type), class: "btn btn-primary btn-sm" %>
+              <%= link_to "削除", body_type_path(body_type), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+        </div>
     </div>

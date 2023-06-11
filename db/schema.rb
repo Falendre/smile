@@ -43,12 +43,14 @@ ActiveRecord::Schema.define(version: 2023_06_08_133937) do
   end
 
   create_table "body_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.date "measurement_date", null: false
     t.string "height", null: false
     t.string "weight", null: false
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_body_types_on_user_id"
   end
 
   create_table "medications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -99,6 +101,7 @@ ActiveRecord::Schema.define(version: 2023_06_08_133937) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "allergies", "users"
+  add_foreign_key "body_types", "users"
   add_foreign_key "medications", "users"
   add_foreign_key "underlying_conditions", "users"
   add_foreign_key "vaccines", "users"
